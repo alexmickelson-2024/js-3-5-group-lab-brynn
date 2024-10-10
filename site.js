@@ -10,13 +10,26 @@ const drawBooks = (books) => {
     </tr>
   `
 
+  const generateBookElement = (book) => {
+    const rowElement = document.createElement("tr")
+    const titleCellElement = document.createElement("td")
+    const authorCellElement = document.createElement("td")
+    const summaryCellElement = document.createElement("td")
+    titleCellElement.textContent = book.title
+    authorCellElement.textContent = book.author
+    summaryCellElement.textContent = book.summary
+    rowElement.append(titleCellElement, authorCellElement, summaryCellElement)
+    return rowElement
+  }
+  
   const tableBodyElement = document.getElementById("myTableBody")
-  tableBodyElement.innerHTML = "";
+  tableBodyElement.replaceChildren();
 
   books.forEach(book => {
-    const firstBookHtml = bookHTML(book)
-    tableBodyElement.innerHTML += firstBookHtml;
+    const firstBookNode = generateBookElement(book)
+    tableBodyElement.appendChild(firstBookNode);
   })
 }
 
 drawBooks(bookList);
+const InputElement = document.getElementById("filterInput")
